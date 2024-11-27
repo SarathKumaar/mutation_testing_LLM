@@ -125,7 +125,7 @@ class SimpleMutationTester:
             print(f"API call error: {e}")
             return []
 
-    def test_mutation(self, coverage_info: CoverageInfo, mutation: dict) -> bool:
+    def test_mutation(self, coverage_info: CoverageInfo, mutation: dict, maven_path: str = r'C:\Program Files\apache-maven-3.9.9\bin\mvn.cmd') -> bool:
         print(f"\nTesting mutation on line {mutation['line_number']}")
         # Create backup
         backup_path = f"{coverage_info.file_path}.backup"
@@ -137,7 +137,6 @@ class SimpleMutationTester:
                 lines = f.readlines()
             
             # Find the actual line within the class
-            # First find the class line
             class_line = -1
             for i, line in enumerate(lines):
                 if "public class" in line or "class" in line:
@@ -149,7 +148,7 @@ class SimpleMutationTester:
                 return False
                 
             # Adjust the line number to be relative to the class content
-            adjusted_line = mutation['line_number'] - 1  # Convert to 0-based index
+            adjusted_line = mutation['line_number'] - 1
             if adjusted_line >= len(lines):
                 print(f"Line number {mutation['line_number']} is out of range")
                 return False
@@ -161,11 +160,11 @@ class SimpleMutationTester:
             
             print("Running tests...")
             result = subprocess.run(
-                [maven_path, test_command],
+                [maven_path, "test"],
                 shell=True,
                 capture_output=True,
                 text=True,
-                cwd=self.project_dir
+                cwd=os.path.dirname(coverage_info.file_path)
             )
             
             # Test fails = mutation killed
@@ -210,7 +209,7 @@ class SimpleMutationTester:
                 print(mutation_log)
                 
                 try:
-                    survived = self.test_mutation(coverage_info, mutation)
+                    survived = self.test_mutation(coverage_info, mutation, maven_path)
                     if not survived:
                         killed_mutations += 1
                     status = "🔴 SURVIVED" if survived else "✅ KILLED"
