@@ -1,0 +1,178 @@
+
+    2024-11-27 19:06:18 INFO:
+    =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    📊 Overall Mutation Coverage 📊
+    📈 Line Coverage: 100.00% 📈
+    🎯 Mutation Coverage: 100.00% 🎯
+    🦠 Total Mutants: 18 🦠
+    🛡️  Survived Mutants: 0 🛡️ 
+    🗡️  Killed Mutants: 18 🗡️ 
+    🕒 Timeout Mutants: 0 🕒
+    🔥 Compile Error Mutants: 0 🔥
+    💰 Total Cost: $0.00167 USD 💰
+    =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    Mutation Details:
+    
+    🟩 M1:
+    ├─ Type: Changed the deposit amount from 1000.00 to 2000.00
+    ├─ File: Main.java
+    ├─ Line 20:
+    │  ├─ Original: accountController.deposit("1001", new BigDecimal("1000.00"));
+    │  └─ Mutated:  accountController.deposit("1001", new BigDecimal("2000.00"));
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M2:
+    ├─ Type: Changed the withdrawal amount from 500.00 to 300.00
+    ├─ File: Main.java
+    ├─ Line 26:
+    │  ├─ Original: accountController.withdraw("1001", new BigDecimal("500.00"));
+    │  └─ Mutated:  accountController.withdraw("1001", new BigDecimal("300.00"));
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M3:
+    ├─ Type: Changed the error message
+    ├─ File: Main.java
+    ├─ Line 30:
+    │  ├─ Original: System.err.println("Error occurred: " + e.getMessage());
+    │  └─ Mutated:  System.err.println("An error occurred: " + e.getMessage());
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M4:
+    ├─ Type: Swapped the order of parameters in the BankAccount constructor
+    ├─ File: BankAccountController.java
+    ├─ Line 12:
+    │  ├─ Original: BankAccount account = new BankAccount(accountNumber, holderName, type);
+    │  └─ Mutated:  BankAccount account = new BankAccount(holderName, accountNumber, type);
+    ├─ Status: Killed
+    └─ Impact: Modified program behavior
+    
+    🟩 M5:
+    ├─ Type: Changed the parameter passed to the getAccount method from accountNumber to holderName
+    ├─ File: BankAccountController.java
+    ├─ Line 18:
+    │  ├─ Original: return accountService.getAccount(accountNumber);
+    │  └─ Mutated:  return accountService.getAccount(holderName);
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M6:
+    ├─ Type: Changed the method called on accountService from deposit to withdraw
+    ├─ File: BankAccountController.java
+    ├─ Line 30:
+    │  ├─ Original: accountService.deposit(accountNumber, amount);
+    │  └─ Mutated:  accountService.withdraw(accountNumber, amount);
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M7:
+    ├─ Type: Added 'throws NullPointerException' to the method signature
+    ├─ File: InsufficientFundsException.java
+    ├─ Line 5:
+    │  ├─ Original: public InsufficientFundsException(String message) {
+    │  └─ Mutated:  public InsufficientFundsException(String message) throws NullPointerException {
+    ├─ Status: Killed
+    └─ Impact: Added additional behavior
+    
+    🟩 M8:
+    ├─ Type: Modified the message passed to the super constructor
+    ├─ File: InsufficientFundsException.java
+    ├─ Line 6:
+    │  ├─ Original: super(message);
+    │  └─ Mutated:  super("Mutation: " + message);
+    ├─ Status: Killed
+    └─ Impact: Modified program behavior
+    
+    🟩 M9:
+    ├─ Type: Changed the message passed to the super constructor to null
+    ├─ File: InsufficientFundsException.java
+    ├─ Line 6:
+    │  ├─ Original: super(message);
+    │  └─ Mutated:  super(null);
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M10:
+    ├─ Type: Changed the comparison operator from <= to <
+    ├─ File: BankAccountService.java
+    ├─ Line 19:
+    │  ├─ Original: if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+    │  └─ Mutated:  if (amount.compareTo(BigDecimal.ZERO) < 0) {
+    ├─ Status: Killed
+    └─ Impact: Modified condition affecting control flow
+    
+    🟩 M11:
+    ├─ Type: Changed the comparison operator from < to <=
+    ├─ File: BankAccountService.java
+    ├─ Line 36:
+    │  ├─ Original: if (account.getBalance().compareTo(amount) < 0) {
+    │  └─ Mutated:  if (account.getBalance().compareTo(amount) <= 0) {
+    ├─ Status: Killed
+    └─ Impact: Modified condition affecting control flow
+    
+    🟩 M12:
+    ├─ Type: Changed the status from CLOSED to OPEN
+    ├─ File: BankAccountService.java
+    ├─ Line 46:
+    │  ├─ Original: account.setStatus("CLOSED");
+    │  └─ Mutated:  account.setStatus("OPEN");
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M13:
+    ├─ Type: Changed HashMap to TreeMap for accountsDB initialization
+    ├─ File: BankAccountDAOImpl.java
+    ├─ Line 8:
+    │  ├─ Original: private final Map<String, BankAccount> accountsDB = new HashMap<>();
+    │  └─ Mutated:  private final Map<String, BankAccount> accountsDB = new TreeMap<>();
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M14:
+    ├─ Type: Changed exception message
+    ├─ File: BankAccountDAOImpl.java
+    ├─ Line 14:
+    │  ├─ Original: throw new AccountNotFoundException("Account not found: " + accountNumber);
+    │  └─ Mutated:  throw new AccountNotFoundException("No account found: " + accountNumber);
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M15:
+    ├─ Type: Changed ArrayList to LinkedList for return type
+    ├─ File: BankAccountDAOImpl.java
+    ├─ Line 20:
+    │  ├─ Original: return new ArrayList<>(accountsDB.values());
+    │  └─ Mutated:  return new LinkedList<>(accountsDB.values());
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M16:
+    ├─ Type: Changed initialization of balance from ZERO to ONE
+    ├─ File: BankAccount.java
+    ├─ Line 19:
+    │  ├─ Original: this.balance = BigDecimal.ZERO;
+    │  └─ Mutated:  this.balance = BigDecimal.ONE;
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M17:
+    ├─ Type: Changed initialization of createdAt from current time to a fixed time
+    ├─ File: BankAccount.java
+    ├─ Line 20:
+    │  ├─ Original: this.createdAt = LocalDateTime.now();
+    │  └─ Mutated:  this.createdAt = LocalDateTime.of(2000, 1, 1, 0, 0);
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
+    🟩 M18:
+    ├─ Type: Changed initialization of status from ACTIVE to FROZEN
+    ├─ File: BankAccount.java
+    ├─ Line 21:
+    │  ├─ Original: this.status = "ACTIVE";
+    │  └─ Mutated:  this.status = "FROZEN";
+    ├─ Status: Killed
+    └─ Impact: Changed implementation behavior
+    
